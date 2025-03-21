@@ -3,21 +3,28 @@ import json
 import threading
 import time
 import datetime
-from api.dex import DexBot, Api  # Make sure DexBot is correctly imported
+from api.dex import DexBot, Api  # Ensure DexBot is correctly imported
 
 app = Flask(__name__)
 
-# Global variable and lock for storing the latest data
+# Global variable and lock for storing the latest fetched data
 latest_data = {}
 data_lock = threading.Lock()
+
+# Default filter to apply by default (for example, filtering by Solana)
+default_filter = "&filters[chainIds][0]=solana"
+
+# Base URL for the DexScreener endpoint
+BASE_URL = "wss://io.dexscreener.com/dex/screener/v5/pairs/h24/1?rankBy[key]=trendingScoreH6&rankBy[order]=desc"
 
 def update_data_periodically():
     global latest_data
     while True:
         try:
-            # Construct the URL (you can modify as needed)
-            text = "wss://io.dexscreener.com/dex/screener/v5/pairs/h24/1?rankBy[key]=trendingScoreH6&rankBy[order]=desc"
-            new_bot = DexBot(Api, text)
+            # Construct the URL by appending the default filter
+            url = BASE_URL + default_filter
+            print("Fetching data from URL:", url)
+            new_bot = DexBot(Api, url)
             fetched_data = new_bot.format_token_data()  # This returns a JSON string
             parsed_data = json.loads(fetched_data)
             # Add a fetched_at timestamp in ISO format (UTC)
