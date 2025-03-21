@@ -42,7 +42,7 @@ threading.Thread(target=update_data_periodically, daemon=True).start()
 
 @app.route('/')
 def root():
-    return "Welcome to our Data API!"
+    return "Welcome to our Data API v2!"
 
 @app.route('/api/dex', methods=['GET'])
 def api_dex():
