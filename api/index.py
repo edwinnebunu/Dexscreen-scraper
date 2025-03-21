@@ -53,4 +53,5 @@ def api_dex():
             return jsonify({"error": "Data not yet available v2"}), 503
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
