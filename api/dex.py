@@ -14,7 +14,7 @@ import requests
 # Apply nest_asyncio
 nest_asyncio.apply()
 
-Api = os.environ["API"]  
+Api = "no_key_needed"
 ID = "Channel ID"
 
 class DexBot():
