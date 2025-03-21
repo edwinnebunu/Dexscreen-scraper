@@ -50,7 +50,7 @@ def api_dex():
         if latest_data:
             return app.response_class(json.dumps(latest_data), mimetype='application/json')
         else:
-            return jsonify({"error": "Data not yet available"}), 503
+            return jsonify({"error": "Data not yet available v2"}), 503
 
 if __name__ == '__main__':
     app.run(debug=True)
